@@ -45,14 +45,15 @@
 </header>
 <section>
     <h2>Select dish:</h2>
+    <a th:href="@{dishes/dish-form}">Add new Dish</a>
     <form action="/chefDetails" method="POST">
         <!-- Dynamically display radio buttons for each dish -->
 
         <th:block th:each="dish : ${dishes}">
-
-            <span th:text="${dish.name}"></span><input type="radio" name="dishId" th:value="${dish.dishId}">
-            <br>
-
+            <a th:href="@{dishes/dish-form/{id}(id = ${dish.id})}">Edit</a>
+            <a th:href="@{dishes/delete/{id}(id = ${dish.id})}">Delete</a>
+            <input type="radio" name="dishId" th:value="${dish.dishId}">
+            <span th:text="${dish.name}"></span> (<span th:text="${dish.cuisine}"></span>)<br/>
         </th:block>
         <input type="hidden" name="chefId" th:value="${chefId}">
         <input type="hidden" name="chefName" th:value="${chefName}">
